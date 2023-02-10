@@ -1,9 +1,9 @@
-import { View, StyleSheet, FlatList } from "react-native";
+import { View, StyleSheet, FlatList, ActivityIndicator } from "react-native";
 import { useEffect, useState } from "react";
-import PhotoCard from "../components/PhotoCard";
+import PhotoCard from "../components/PhotoCard/PhotoCard";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { fetchPhotos } from "../store/photos/photosThunks";
-import { removePhotos } from "../store/photos/photosSlice";
+
 
 const Home = () => {
   const photos = useAppSelector((state) => state.photos.photos);
@@ -13,14 +13,16 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(fetchPhotos(page));
-
-    return () => {
-      dispatch(removePhotos())
-    }
   }, [page]);
 
   const fetchMorePhotos = () => {
     setPage((prev) => prev + 1)
+  }
+
+  if(!photos.length) {
+    return (
+      <ActivityIndicator />
+    )
   }
 
   return (
@@ -29,7 +31,7 @@ const Home = () => {
         data={photos}
         renderItem={({ item }) => <PhotoCard photo={item} />}
         onEndReached={fetchMorePhotos}
-      ></FlatList>
+      />
     </View>
   );
 };

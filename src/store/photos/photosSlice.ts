@@ -21,7 +21,7 @@ export const photosSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchPhotos.fulfilled, (state, action) => {
       state.photos = [...state.photos, ...action.payload];
-    });
+    })
   },
 });
 

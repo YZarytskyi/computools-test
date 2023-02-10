@@ -3,7 +3,7 @@ import axios from "axios";
 export const getPhotos = async (page: number) => {
   try {
     const { data } = await axios.get(
-      `https://picsum.photos/v2/list?page=${page}`
+      `https://picsum.photos/v2/list?limit=5&page=${page}`
     );
     return data;
   } catch (error) {
