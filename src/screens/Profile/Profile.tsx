@@ -1,9 +1,17 @@
 import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
-// import { TouchableOpacity } from "react-native-gesture-handler";
-import { useAppSelector } from "../store/hooks";
+import { useDispatch } from "react-redux";
+import { logout } from "../../store/auth/authSlice";
+import { useAppSelector } from "../../store/hooks";
+import { removePhotos } from "../../store/photos/photosSlice";
 
 const Profile = () => {
+  const dispatch = useDispatch();
   const { name, email } = useAppSelector((state) => state.auth);
+
+  const onPressLogout = () => {
+    dispatch(logout());
+    dispatch(removePhotos())
+  }
 
   return (
     <View style={styles.container}>
@@ -24,7 +32,7 @@ const Profile = () => {
         <Text style={styles.themeBtn}>Change theme to "Light"</Text>
       </TouchableOpacity>
       <TouchableOpacity>
-        <Text style={styles.logoutBtn}>Logout</Text>
+        <Text style={styles.logoutBtn} onPress={onPressLogout}>Logout</Text>
       </TouchableOpacity>
     </View>
   );
