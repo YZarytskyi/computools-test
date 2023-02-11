@@ -1,15 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { fetchUserAvatar } from "./authThunks";
 
 interface AuthState {
   isAuth: boolean;
   name: string;
   email: string;
+  avatar: string;
 }
 
 const initialState: AuthState = {
   isAuth: false,
   name: "",
   email: "",
+  avatar: "",
 };
 
 export const authSlice = createSlice({
@@ -27,6 +30,11 @@ export const authSlice = createSlice({
       state.email = "";
       state.isAuth = false;
     },
+  },
+  extraReducers(builder) {
+    builder.addCase(fetchUserAvatar.fulfilled, (state, action) => {
+      state.avatar = action.payload;
+    });
   },
 });
 

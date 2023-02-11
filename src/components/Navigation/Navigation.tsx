@@ -1,7 +1,9 @@
+import { Text, View, StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import Home from "../../screens/Home/Home";
 import Profile from "../../screens/Profile/Profile";
+import Icon from "react-native-vector-icons/AntDesign";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -11,15 +13,54 @@ const Navigation = () => {
       <Tab.Navigator
         initialRouteName="Home"
         screenOptions={{
+          tabBarShowLabel: false,
           tabBarLabelStyle: { fontSize: 12 },
-          tabBarStyle: { backgroundColor: "powderblue" },
+          tabBarStyle: { backgroundColor: "#303030" },
         }}
       >
-        <Tab.Screen name="Feeds" component={Home} />
-        <Tab.Screen name="Profile" component={Profile} />
+        <Tab.Screen
+          name="Feeds"
+          component={Home}
+          options={{
+            tabBarIconStyle: { width: "100%" },
+            tabBarIcon: () => (
+              <View style={styles.topContainer}>
+                <Icon name="home" size={20} style={styles.icon} />
+                <Text style={styles.topText}>FEEDS</Text>
+              </View>
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Profile"
+          component={Profile}
+          options={{
+            tabBarIconStyle: { width: "100%" },
+            tabBarIcon: () => (
+              <View style={styles.topContainer}>
+                <Icon name="user" size={20} style={styles.icon} />
+                <Text style={styles.topText}>PROFILE</Text>
+              </View>
+            ),
+          }}
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );
 };
 
 export default Navigation;
+
+const styles = StyleSheet.create({
+  topContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  icon: {
+    color: "white",
+    marginRight: 5,
+  },
+  topText: {
+    color: "white",
+  },
+});

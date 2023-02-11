@@ -19,7 +19,6 @@ const AppWrapper = () => {
 
 const App = () => {
   const isAuth = useAppSelector((state) => state.auth.isAuth);
-
   return isAuth ? <Navigation /> : <Login />;
 };
 

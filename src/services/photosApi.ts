@@ -1,7 +1,6 @@
 import axios from "axios";
 
 export const getPhotos = async (page: number) => {
-  console.log(page)
   try {
     const { data } = await axios.get(
       `https://picsum.photos/v2/list?limit=7&page=${page}`

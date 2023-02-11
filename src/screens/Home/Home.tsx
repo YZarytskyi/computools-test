@@ -19,6 +19,7 @@ const Home = () => {
   useEffect(() => {
     if (page === 1) {
       dispatch(fetchPhotos());
+      return
     }
     dispatch(fetchMorePhotos(page));
   }, [page]);

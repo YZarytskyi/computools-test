@@ -8,10 +8,11 @@ import {
   Text,
 } from "react-native";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { useDispatch } from "react-redux";
 import { login } from "../../store/auth/authSlice";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./schema";
+import { fetchUserAvatar } from "../../store/auth/authThunks";
+import { useAppDispatch } from "../../store/hooks";
 
 type FormData = {
   name: string;
@@ -20,7 +21,7 @@ type FormData = {
 };
 
 const Login = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const {
     control,
     handleSubmit,
@@ -29,7 +30,10 @@ const Login = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit: SubmitHandler<FormData> = (data) => dispatch(login(data));
+  const onSubmit: SubmitHandler<FormData> = (data) => {
+    dispatch(fetchUserAvatar());
+    dispatch(login(data));
+  };
 
   return (
     <TouchableWithoutFeedback
@@ -106,14 +110,6 @@ const Login = () => {
         >
           <Text style={styles.loginButtonText}>Login</Text>
         </TouchableOpacity>
-        <View style={styles.signUpTextView}>
-          <Text style={styles.signUpText}>Don't have an account?</Text>
-          <TouchableOpacity>
-            <Text style={[styles.signUpText, { color: "#B53471" }]}>
-              {" Sign Up"}
-            </Text>
-          </TouchableOpacity>
-        </View>
       </View>
     </TouchableWithoutFeedback>
   );
@@ -176,17 +172,6 @@ const styles = StyleSheet.create({
     padding: 14,
     marginHorizontal: 10,
     borderRadius: 100,
-  },
-  signUpTextView: {
-    marginTop: 40,
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-  },
-  signUpText: {
-    color: "#808e9b",
-    fontSize: 20,
-    fontWeight: "500",
   },
   error: {
     marginTop: 5,
