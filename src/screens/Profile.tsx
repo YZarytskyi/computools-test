@@ -1,5 +1,5 @@
-import { Text, View, StyleSheet, Image } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
+// import { TouchableOpacity } from "react-native-gesture-handler";
 import { useAppSelector } from "../store/hooks";
 
 const Profile = () => {
