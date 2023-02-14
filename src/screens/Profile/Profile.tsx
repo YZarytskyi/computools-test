@@ -12,7 +12,7 @@ import { fetchUserAvatar } from '../../store/auth/authThunks';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { removePhotos } from '../../store/photos/photosSlice';
 
-const Profile = () => {
+const ProfileScreen = () => {
   const dispatch = useAppDispatch();
   const { name, email, avatar } = useAppSelector(state => state.auth);
 
@@ -54,7 +54,7 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default ProfileScreen;
 
 const styles = StyleSheet.create({
   container: {

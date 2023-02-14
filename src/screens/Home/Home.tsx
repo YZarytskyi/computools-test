@@ -10,7 +10,7 @@ import PhotoCard from '../../components/PhotoCard/PhotoCard';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { fetchPhotos, fetchMorePhotos } from '../../store/photos/photosThunks';
 
-const Home = () => {
+const HomeScreen = () => {
   const { photos, isLoading } = useAppSelector(state => state.photos);
   const dispatch = useAppDispatch();
 
@@ -58,7 +58,7 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {

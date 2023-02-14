@@ -1,9 +1,9 @@
 import { Text, View, StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import Home from "../../screens/Home/Home";
-import Profile from "../../screens/Profile/Profile";
+import ProfileScreen from "../../screens/Profile/Profile";
 import Icon from "react-native-vector-icons/AntDesign";
+import HomeStack from "../HomeStack/HomeStack";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -20,7 +20,7 @@ const Navigation = () => {
       >
         <Tab.Screen
           name="Feeds"
-          component={Home}
+          component={HomeStack}
           options={{
             tabBarIconStyle: { width: "100%" },
             tabBarIcon: () => (
@@ -33,7 +33,7 @@ const Navigation = () => {
         />
         <Tab.Screen
           name="Profile"
-          component={Profile}
+          component={ProfileScreen}
           options={{
             tabBarIconStyle: { width: "100%" },
             tabBarIcon: () => (

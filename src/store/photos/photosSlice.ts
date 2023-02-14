@@ -35,7 +35,7 @@ export const photosSlice = createSlice({
       })
       .addCase(fetchPhotos.rejected, (state) => {
         state.isLoading = false;
-      });
+      })
   },
 });
 
