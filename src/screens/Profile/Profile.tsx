@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   Text,
   View,
@@ -7,12 +8,17 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { logout } from "../../store/auth/authSlice";
+import { fetchUserAvatar } from "../../store/auth/authThunks";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { removePhotos } from "../../store/photos/photosSlice";
 
 const Profile = () => {
   const dispatch = useAppDispatch();
   const { name, email, avatar } = useAppSelector((state) => state.auth);
+
+  useEffect(() => {
+    dispatch(fetchUserAvatar())
+  }, [])
 
   const onPressLogout = () => {
     dispatch(logout());
