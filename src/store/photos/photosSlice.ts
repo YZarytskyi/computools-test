@@ -2,12 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 import { Photo } from "../../types/types";
 import { fetchMorePhotos, fetchPhotos, } from "./photosThunks";
 
-interface AuthState {
+interface PhotosState {
   photos: Photo[];
   isLoading: boolean;
 }
 
-const initialState: AuthState = {
+const initialState: PhotosState = {
   photos: [],
   isLoading: false,
 };
