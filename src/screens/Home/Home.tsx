@@ -4,14 +4,14 @@ import {
   FlatList,
   ActivityIndicator,
   RefreshControl,
-} from "react-native";
-import { useCallback, useEffect, useState } from "react";
-import PhotoCard from "../../components/PhotoCard/PhotoCard";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { fetchPhotos, fetchMorePhotos } from "../../store/photos/photosThunks";
+} from 'react-native';
+import { useCallback, useEffect, useState } from 'react';
+import PhotoCard from '../../components/PhotoCard/PhotoCard';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { fetchPhotos, fetchMorePhotos } from '../../store/photos/photosThunks';
 
 const Home = () => {
-  const { photos, isLoading } = useAppSelector((state) => state.photos);
+  const { photos, isLoading } = useAppSelector(state => state.photos);
   const dispatch = useAppDispatch();
 
   const [page, setPage] = useState<number>(1);
@@ -19,16 +19,19 @@ const Home = () => {
   useEffect(() => {
     if (page === 1) {
       dispatch(fetchPhotos());
-      return
+      return;
     }
     dispatch(fetchMorePhotos(page));
   }, [page]);
 
   const fetchMore = () => {
-    setPage((prev) => prev + 1);
+    setPage(prev => prev + 1);
   };
 
   const onRefresh = useCallback(() => {
+    if (page === 1) {
+      dispatch(fetchPhotos());
+    }
     setPage(1);
   }, []);
 
@@ -60,14 +63,14 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "black",
+    backgroundColor: 'black',
     paddingVertical: 20,
     paddingHorizontal: 20,
   },
   loading: {
     flex: 1,
-    backgroundColor: "black",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: 'black',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

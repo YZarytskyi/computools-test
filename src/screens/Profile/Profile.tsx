@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 import {
   Text,
   View,
@@ -6,25 +6,27 @@ import {
   Image,
   TouchableOpacity,
   ActivityIndicator,
-} from "react-native";
-import { logout } from "../../store/auth/authSlice";
-import { fetchUserAvatar } from "../../store/auth/authThunks";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { removePhotos } from "../../store/photos/photosSlice";
+} from 'react-native';
+import { logout } from '../../store/auth/authSlice';
+import { fetchUserAvatar } from '../../store/auth/authThunks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { removePhotos } from '../../store/photos/photosSlice';
 
 const Profile = () => {
   const dispatch = useAppDispatch();
-  const { name, email, avatar } = useAppSelector((state) => state.auth);
+  const { name, email, avatar } = useAppSelector(state => state.auth);
 
   useEffect(() => {
-    dispatch(fetchUserAvatar())
-  }, [])
+    if (!avatar) {
+      dispatch(fetchUserAvatar());
+    }
+  }, []);
 
   const onPressLogout = () => {
     dispatch(logout());
     dispatch(removePhotos());
   };
-  
+
   return (
     <View style={styles.container}>
       <View style={styles.profile}>
@@ -36,7 +38,7 @@ const Profile = () => {
             style={styles.image}
           />
         ) : (
-          <ActivityIndicator style={{marginRight: 20}}/>
+          <ActivityIndicator style={{ marginRight: 20 }} />
         )}
         <View>
           <Text style={styles.text}>Name: {name}</Text>
@@ -57,15 +59,15 @@ export default Profile;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "black",
+    backgroundColor: 'black',
     paddingVertical: 20,
     paddingHorizontal: 20,
   },
   profile: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: "auto",
-    backgroundColor: "gray",
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 'auto',
+    backgroundColor: 'gray',
     paddingVertical: 20,
     paddingHorizontal: 20,
     borderRadius: 10,
@@ -77,14 +79,14 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   text: {
-    color: "white",
+    color: 'white',
   },
   logoutBtn: {
     marginBottom: 10,
     paddingVertical: 10,
-    textAlign: "center",
-    backgroundColor: "gray",
-    color: "white",
+    textAlign: 'center',
+    backgroundColor: 'gray',
+    color: 'white',
     borderRadius: 10,
   },
 });
