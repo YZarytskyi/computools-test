@@ -72,7 +72,7 @@ const Login = () => {
               value={value}
               placeholder="Email"
               placeholderTextColor={"gray"}
-              autoCorrect={true}
+              autoCorrect={false}
               autoCapitalize="none"
               autoComplete="email"
               keyboardType="email-address"
